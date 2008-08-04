@@ -1,0 +1,13 @@
+diff -up k9copy-2.0.0-Source/lib/dvdnav/dvdread.c.so4 k9copy-2.0.0-Source/lib/dvdnav/dvdread.c
+--- k9copy-2.0.0-Source/lib/dvdnav/dvdread.c.so4	2008-03-24 02:07:21.000000000 -0500
++++ k9copy-2.0.0-Source/lib/dvdnav/dvdread.c	2008-06-06 07:38:00.000000000 -0500
+@@ -9,6 +9,9 @@ DvdreadFunctions_t f_dvdread;
+ 
+ void loadDvdread() {
+ 	libHandle=dlopen("libdvdread.so",RTLD_LAZY | RTLD_GLOBAL);
++        if (!libHandle) {
++            libHandle=dlopen("libdvdread.so.4",RTLD_LAZY | RTLD_GLOBAL);
++        }
+ 	if (!libHandle) {
+ 	    libHandle=dlopen("libdvdread.so.3",RTLD_LAZY | RTLD_GLOBAL);    
+ 	}	
