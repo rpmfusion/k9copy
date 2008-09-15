@@ -1,6 +1,6 @@
-diff -up k9copy-2.0.0-Source/lib/import/k9avidecode.cpp.gcc43 k9copy-2.0.0-Source/lib/import/k9avidecode.cpp
---- k9copy-2.0.0-Source/lib/import/k9avidecode.cpp.gcc43	2008-03-24 02:07:21.000000000 -0500
-+++ k9copy-2.0.0-Source/lib/import/k9avidecode.cpp	2008-06-06 07:56:35.000000000 -0500
+diff -up k9copy-2.0.0-Source/src/import/k9avidecode.cpp.gcc43 k9copy-2.0.0-Source/lib/import/k9avidecode.cpp
+--- k9copy-2.0.0-Source/src/import/k9avidecode.cpp.gcc43	2008-03-24 02:07:21.000000000 -0500
++++ k9copy-2.0.0-Source/src/import/k9avidecode.cpp	2008-06-06 07:56:35.000000000 -0500
 @@ -10,6 +10,7 @@
  //
  //
@@ -10,9 +10,9 @@ diff -up k9copy-2.0.0-Source/lib/import/k9avidecode.cpp.gcc43 k9copy-2.0.0-Sourc
  #include <qimage.h>
  #include <dlfcn.h>
 diff -up k9copy-2.0.0-Source/lib/backup/k9dvdbackup.cpp.gcc43 k9copy-2.0.0-Source/lib/backup/k9dvdbackup.cpp
-diff -up k9copy-2.0.0-Source/lib/main/k9glwidget.cpp.gcc43 k9copy-2.0.0-Source/lib/main/k9glwidget.cpp
---- k9copy-2.0.0-Source/lib/main/k9glwidget.cpp.gcc43	2008-03-24 02:07:21.000000000 -0500
-+++ k9copy-2.0.0-Source/lib/main/k9glwidget.cpp	2008-06-06 07:55:44.000000000 -0500
+diff -up k9copy-2.0.0-Source/src/main/k9glwidget.cpp.gcc43 k9copy-2.0.0-Source/lib/main/k9glwidget.cpp
+--- k9copy-2.0.0-Source/src/main/k9glwidget.cpp.gcc43	2008-03-24 02:07:21.000000000 -0500
++++ k9copy-2.0.0-Source/src/main/k9glwidget.cpp	2008-06-06 07:55:44.000000000 -0500
 @@ -12,6 +12,7 @@
  
  #include "k9glwidget.h"

@@ -1,18 +1,18 @@
 
 Name:           k9copy
-Version:        2.0.0
-Release:        6%{?dist}
+Version:        2.0.2
+Release:        2%{?dist}
 Summary:        Video DVD backup and creation program
 Group:          Applications/Multimedia
 License:        GPLv2+
 URL:            http://k9copy.sourceforge.net/
-Source0:        http://download.sourceforge.net/%{name}/%{name}-%{version}-Source.tar.gz
+Source0:        http://downloads.sourceforge.net/%{name}/%{name}-%{version}-Source.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Patch1: k9copy-2.0.0-libdvdread_so4.patch
 Patch2: k9copy-2.0.0-gcc43.patch
 
-# build fails here
+# FIXME: build fails here
 ExcludeArch: ppc ppc64
 
 BuildRequires:  cmake
@@ -85,15 +85,23 @@ gtk-update-icon-cache -q %{_datadir}/icons/hicolor 2> /dev/null ||:
 %defattr(-,root,root,-)
 %doc COPYING
 %{_kde4_bindir}/k9copy
+%{_kde4_bindir}/k9play
 %{_kde4_bindir}/k9xineplayer
 %{_kde4_appsdir}/k9copy/
 %{_kde4_datadir}/applications/kde4/k9copy.desktop
 %{_kde4_datadir}/icons/hicolor/*/*/*
 %{_kde4_datadir}/kde4/services/*
 
+
 %changelog
-* Mon Aug 04 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info - 2.0.0-6
-- rebuild
+* Mon Sep 15 2008 Rex Dieter <rdieter@fedoraproject.org> 2.0.2-2
+- respin for rpmfusion
+
+* Mon Jun 16 2008 Rex Dieter <rdieter@fedoraproject.org> 2.0.2-1
+- k9copy-2.0.2
+
+* Sat Jun 14 2008 Rex Dieter <rdieter@fedoraproject.org> 2.0.1-1
+- k9copy-2.0.1
 
 * Fri Jun 06 2008 Rex Dieter <rdieter@fedoraproject.org> 2.0.0-5
 - gcc43 patch (forward port malloc patch from fedoraforum)
