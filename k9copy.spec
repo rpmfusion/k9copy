@@ -1,6 +1,6 @@
 Name:           k9copy
 Version:        1.2.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Video DVD backup and creation program
 Group:          Applications/Multimedia
 License:        GPLv2
@@ -105,6 +105,9 @@ gtk-update-icon-cache -q %{_datadir}/icons/hicolor 2> /dev/null ||:
 
 
 %changelog
+* Mon Sep 15 2008 Rex Dieter <rdieter@fedoraproject.org> 1.2.2-2
+- rebuild for rpmfusion
+
 * Sun Jan 06 2008 Ian Chapman <packages[AT]amiga-hardware.com> 1.2.2-1
 - Upgrade to 1.2.2
 - Added patch to fix buffer overflows (Thanks to Gustavo Maciel Dias Vieira)
