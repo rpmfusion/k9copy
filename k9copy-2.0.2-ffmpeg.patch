@@ -1,42 +1,6 @@
-diff -up k9copy-2.0.2-Source/cmake/FindFFmpeg.cmake.ffmpeg k9copy-2.0.2-Source/cmake/FindFFmpeg.cmake
---- k9copy-2.0.2-Source/cmake/FindFFmpeg.cmake.ffmpeg	2008-07-05 01:08:53.000000000 -0500
-+++ k9copy-2.0.2-Source/cmake/FindFFmpeg.cmake	2008-09-16 15:04:11.000000000 -0500
-@@ -1,6 +1,6 @@
- MACRO (FINDFFMPEG _include _lib)
- 
--FIND_PATH(FFMPEG_INCLUDE_DIR ${_include} PATHS)
-+FIND_PATH(FFMPEG_INCLUDE_DIR ${_include}/ffmpeg PATHS)
- FIND_LIBRARY(FFMPEG_LIBRARY NAMES ${_lib} PATHS ) 
- 
- IF (FFMPEG_INCLUDE_DIR AND FFMPEG_LIBRARY)
-@@ -16,4 +16,4 @@ IF (INC_FOUND)
- ELSE (INC_FOUND)
-       MESSAGE(FATAL_ERROR "Could not find ${_lib}")
- ENDIF (INC_FOUND)
--ENDMACRO (FINDFFMPEG _include _lib )
-\ No newline at end of file
-+ENDMACRO (FINDFFMPEG _include _lib )
-diff -up k9copy-2.0.2-Source/cmake/FindFFmpegScale.cmake.ffmpeg k9copy-2.0.2-Source/cmake/FindFFmpegScale.cmake
---- k9copy-2.0.2-Source/cmake/FindFFmpegScale.cmake.ffmpeg	2008-07-05 01:08:53.000000000 -0500
-+++ k9copy-2.0.2-Source/cmake/FindFFmpegScale.cmake	2008-09-16 15:04:33.000000000 -0500
-@@ -1,6 +1,6 @@
- MACRO (FINDFFMPEGSCALE _include _lib)
- 
--FIND_PATH(FFMPEGSCALE_INCLUDE_DIR ${_include} PATHS)
-+FIND_PATH(FFMPEGSCALE_INCLUDE_DIR ${_include}/ffmpeg PATHS)
- FIND_LIBRARY(FFMPEGSCALE_LIBRARY NAMES ${_lib} PATHS ) 
- 
- IF (FFMPEGSCALE_INCLUDE_DIR AND FFMPEGSCALE_LIBRARY)
-@@ -17,4 +17,4 @@ ELSE (HAVE_SWSCALE)
-       MESSAGE(STATUS "k9copy will be built without swscale support")
-       #MESSAGE(FATAL_ERROR "Could not find ${_lib}")
- ENDIF (HAVE_SWSCALE)
--ENDMACRO (FINDFFMPEGSCALE _include _lib )
-\ No newline at end of file
-+ENDMACRO (FINDFFMPEGSCALE _include _lib )
 diff -up k9copy-2.0.2-Source/CMakeLists.txt.ffmpeg k9copy-2.0.2-Source/CMakeLists.txt
 --- k9copy-2.0.2-Source/CMakeLists.txt.ffmpeg	2008-07-05 01:08:53.000000000 -0500
-+++ k9copy-2.0.2-Source/CMakeLists.txt	2008-09-16 15:02:43.000000000 -0500
++++ k9copy-2.0.2-Source/CMakeLists.txt	2008-09-16 14:50:22.000000000 -0500
 @@ -94,7 +94,7 @@ CHECK_INCLUDE_FILES(sys/types.h     HAVE
  CHECK_INCLUDE_FILES(unistd.h        HAVE_UNISTD_H)                      # simapi.h
  CHECK_INCLUDE_FILES(malloc.h        HAVE_MALLOC_H)                      # simapi.h
@@ -64,8 +28,8 @@ diff -up k9copy-2.0.2-Source/CMakeLists.txt.ffmpeg k9copy-2.0.2-Source/CMakeList
   )
  
 diff -up k9copy-2.0.2-Source/src/import/k9avidecode.cpp.ffmpeg k9copy-2.0.2-Source/src/import/k9avidecode.cpp
---- k9copy-2.0.2-Source/src/import/k9avidecode.cpp.ffmpeg	2008-09-16 15:02:43.000000000 -0500
-+++ k9copy-2.0.2-Source/src/import/k9avidecode.cpp	2008-09-16 15:02:43.000000000 -0500
+--- k9copy-2.0.2-Source/src/import/k9avidecode.cpp.ffmpeg	2008-09-16 14:46:48.000000000 -0500
++++ k9copy-2.0.2-Source/src/import/k9avidecode.cpp	2008-09-16 14:46:48.000000000 -0500
 @@ -11,14 +11,14 @@
  //
  #include "k9avidecode.h"
@@ -85,7 +49,7 @@ diff -up k9copy-2.0.2-Source/src/import/k9avidecode.cpp.ffmpeg k9copy-2.0.2-Sour
  
 diff -up k9copy-2.0.2-Source/src/import/k9avidecode.h.ffmpeg k9copy-2.0.2-Source/src/import/k9avidecode.h
 --- k9copy-2.0.2-Source/src/import/k9avidecode.h.ffmpeg	2008-07-05 01:08:53.000000000 -0500
-+++ k9copy-2.0.2-Source/src/import/k9avidecode.h	2008-09-16 15:02:43.000000000 -0500
++++ k9copy-2.0.2-Source/src/import/k9avidecode.h	2008-09-16 14:46:48.000000000 -0500
 @@ -14,12 +14,12 @@
  
  #include "k9common.h"

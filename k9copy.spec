@@ -57,10 +57,10 @@ Video DVD backup and creation program, features include:
 %build
 mkdir -p %{_target_platform}
 pushd %{_target_platform}
-%{cmake_kde4} .. 
-#  -DFFMPEG_INCLUDE_DIR=%{_includedir}/ffmpeg \
-#  -DFFMPEGSCALE_INCLUDE_DIR=%{_includedir}/ffmpeg \
-
+%{cmake_kde4} \
+  -DFFMPEG_INCLUDE_DIR=%{_includedir}/ffmpeg \
+  -DFFMPEGSCALE_INCLUDE_DIR=%{_includedir}/ffmpeg \
+  ..
 popd
 
 make %{?_smp_mflags} -C %{_target_platform} VERBOSE=1
