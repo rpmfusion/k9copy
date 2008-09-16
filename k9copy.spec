@@ -11,6 +11,8 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Patch1: k9copy-2.0.0-libdvdread_so4.patch
 Patch2: k9copy-2.0.0-gcc43.patch
+# FIXME: use pkgconfig
+Patch3: k9copy-2.0.2-ffmpeg.patch
 
 # FIXME: build fails here
 ExcludeArch: ppc ppc64
@@ -23,8 +25,8 @@ BuildRequires:  kdelibs4-devel
 BuildRequires:  libdvdread-devel
 BuildRequires:  xine-lib-devel
 
-Requires(post): coreutils
-Requires(postun): coreutils
+Requires(post): xdg-utils
+Requires(postun): xdg-utils
 
 Requires:       dvd+rw-tools
 Requires:       dvdauthor
@@ -49,15 +51,19 @@ Video DVD backup and creation program, features include:
 
 %patch1 -p1 -b .libdvdread_so4
 %patch2 -p1 -b .gcc43
+%patch3 -p1 -b .ffmpeg
 
 
 %build
 mkdir -p %{_target_platform}
 pushd %{_target_platform}
-%{cmake_kde4} ..
+%{cmake_kde4} \
+  -DFFMPEG_INCLUDE_DIR=%{_includedir}/ffmpeg \
+  -DFFMPEGSCALE_INCLUDE_DIR=%{_includedir}/ffmpeg \
+  ..
 popd
 
-make %{?_smp_mflags} -C %{_target_platform}
+make %{?_smp_mflags} -C %{_target_platform} VERBOSE=1
 
 
 %install
@@ -72,13 +78,10 @@ rm -rf %{buildroot}
 
 
 %post
-touch --no-create %{_datadir}/icons/hicolor
-gtk-update-icon-cache -q %{_datadir}/icons/hicolor 2> /dev/null ||:
-
+xdg-icon-resource forceupdate --theme hicolor 2> /dev/null || :
 
 %postun
-touch --no-create %{_datadir}/icons/hicolor
-gtk-update-icon-cache -q %{_datadir}/icons/hicolor 2> /dev/null ||:
+xdg-icon-resource forceupdate --theme hicolor 2> /dev/null || :
 
 
 %files -f %{name}.lang
@@ -89,13 +92,13 @@ gtk-update-icon-cache -q %{_datadir}/icons/hicolor 2> /dev/null ||:
 %{_kde4_bindir}/k9xineplayer
 %{_kde4_appsdir}/k9copy/
 %{_kde4_datadir}/applications/kde4/k9copy.desktop
-%{_kde4_datadir}/icons/hicolor/*/*/*
 %{_kde4_datadir}/kde4/services/*
+%{_kde4_iconsdir}/hicolor/*/*/*
 
 
 %changelog
-* Mon Sep 15 2008 Rex Dieter <rdieter@fedoraproject.org> 2.0.2-2
-- respin for rpmfusion
+* Tue Sep 16 2008 Rex Dieter <rdieter@fedoraproject.org> 2.0.2-2
+- ffmpeg patch 
 
 * Mon Jun 16 2008 Rex Dieter <rdieter@fedoraproject.org> 2.0.2-1
 - k9copy-2.0.2
