@@ -1,40 +1,41 @@
 
-Name:           k9copy
-Version:        2.0.2
-Release:        2%{?dist}
-Summary:        Video DVD backup and creation program
-Group:          Applications/Multimedia
-License:        GPLv2+
-URL:            http://k9copy.sourceforge.net/
-Source0:        http://downloads.sourceforge.net/%{name}/%{name}-%{version}-Source.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Name:    k9copy
+Version: 2.0.2
+Release: 3%{?dist}
+Summary: Video DVD backup and creation program
+Group:   Applications/Multimedia
+License: GPLv2+
+URL:     http://k9copy.sourceforge.net/
+Source0: http://downloads.sourceforge.net/%{name}/%{name}-%{version}-Source.tar.gz
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Patch1: k9copy-2.0.0-libdvdread_so4.patch
 Patch2: k9copy-2.0.0-gcc43.patch
-# FIXME: use pkgconfig
+# FIXME/TODO: use pkgconfig
 Patch3: k9copy-2.0.2-ffmpeg.patch
 
 # FIXME: build fails here
 ExcludeArch: ppc ppc64
 
-BuildRequires:  cmake
-BuildRequires:  ffmpeg-devel
-BuildRequires:  gettext
-BuildRequires:  hal-devel
-BuildRequires:  kdelibs4-devel
-BuildRequires:  libdvdread-devel
-BuildRequires:  xine-lib-devel
+BuildRequires: cmake
+BuildRequires: ffmpeg-devel
+BuildRequires: gettext
+BuildRequires: hal-devel
+BuildRequires: kdelibs4-devel libutempter-devel
+BuildRequires: libdvdread-devel
+BuildRequires: pkgconfig
+BuildRequires: xine-lib-devel
 
 Requires(post): xdg-utils
 Requires(postun): xdg-utils
 
-Requires:       dvd+rw-tools
-Requires:       dvdauthor
+Requires: dvd+rw-tools
+Requires: dvdauthor
 
 # Optional, not *strictly* required:
-Requires:       libdvdcss
-Requires:       mencoder
-Requires:       mplayer
+Requires(hint): libdvdcss
+Requires(hint): mencoder
+Requires(hint): mplayer
 
 %description
 Video DVD backup and creation program, features include:
@@ -58,8 +59,8 @@ Video DVD backup and creation program, features include:
 mkdir -p %{_target_platform}
 pushd %{_target_platform}
 %{cmake_kde4} \
-  -DFFMPEG_INCLUDE_DIR=%{_includedir}/ffmpeg \
-  -DFFMPEGSCALE_INCLUDE_DIR=%{_includedir}/ffmpeg \
+  -DFFMPEG_INCLUDE_DIR=$(pkg-config libavcodec --variable=includedir) \
+  -DFFMPEGSCALE_INCLUDE_DIR=$(pkg-config libswscale --variable=includedir) \
   ..
 popd
 
@@ -97,6 +98,9 @@ xdg-icon-resource forceupdate --theme hicolor 2> /dev/null || :
 
 
 %changelog
+* Thu Sep 18 2008 Rex Dieter <rdieter@fedoraproject.org> 2.0.2-3
+- use pkg-config to query ffmpeg includedir(s)
+
 * Tue Sep 16 2008 Rex Dieter <rdieter@fedoraproject.org> 2.0.2-2
 - ffmpeg patch 
 
