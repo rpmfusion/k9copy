@@ -1,7 +1,7 @@
 
 Name:    k9copy
 Version: 2.0.2
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: Video DVD backup and creation program
 Group:   Applications/Multimedia
 License: GPLv2+
@@ -33,7 +33,6 @@ Requires: dvd+rw-tools
 Requires: dvdauthor
 
 # Optional, not *strictly* required:
-Requires(hint): libdvdcss
 Requires(hint): mencoder
 Requires(hint): mplayer
 
@@ -98,6 +97,9 @@ xdg-icon-resource forceupdate --theme hicolor 2> /dev/null || :
 
 
 %changelog
+* Fri Sep 19 2008 Rex Dieter <rdieter@fedoraproject.org> 2.0.2-4
+- drop Requires: libdvdcss
+
 * Thu Sep 18 2008 Rex Dieter <rdieter@fedoraproject.org> 2.0.2-3
 - use pkg-config to query ffmpeg includedir(s)
 
