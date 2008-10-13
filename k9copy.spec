@@ -18,6 +18,8 @@ Source0:        http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Patch0:         k9copy-1.2.2-sprintf-overflow.patch
+Patch1:         k9copy-1.2.2-ffmpeg.patch
+Patch2:         k9copy-1.2.2-gcc43.patch
 
 BuildRequires:  dbus-qt-devel
 BuildRequires:  ffmpeg-devel
@@ -45,7 +47,9 @@ Video DVD backup and creation program, features include:
 
 %prep
 %setup -q
-%patch0 -p1
+%patch0 -p1 -b .sprintf-overflow
+%patch1 -p1 -b .ffmpeg
+%patch2 -p1 -b .gcc43
 
 # Permission fixes
 chmod -x */*.h */*.cpp AUTHORS COPYING TODO
@@ -58,6 +62,9 @@ sed -i \
 
 %build
 unset QTDIR || : ; . /etc/profile.d/qt.sh
+
+CPPFLAGS="$(pkg-config --cflags libavcodec) $(pkg-config --cflags libavformat) $CPPFLAGS"
+export CPPFLAGS
 
 %configure \
   --disable-rpath \
