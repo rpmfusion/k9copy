@@ -1,28 +1,37 @@
+
+%if 0%{?fedora} > 6
+%define kdelibs3 kdelibs3
+%define kdepim3 kdepim3
+%else
+%define kdelibs3 kdelibs
+BuildRequires: libutempter-devel
+%endif
+
 Name:           k9copy
 Version:        1.2.2
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Video DVD backup and creation program
 Group:          Applications/Multimedia
 License:        GPLv2
 URL:            http://k9copy.sourceforge.net/
-Source0:        http://download.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-Patch0:         k9copy-1.2.2-sprintf-overflow.patch
+Source0:        http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
+Patch0:         k9copy-1.2.2-sprintf-overflow.patch
 
 BuildRequires:  dbus-qt-devel
 BuildRequires:  ffmpeg-devel
 BuildRequires:  gettext
 BuildRequires:  hal-devel
-BuildRequires:  kdelibs3-devel
+BuildRequires:  %{kdelibs3}-devel
 BuildRequires:  libdvdread-devel
 
 Requires:       dvd+rw-tools
 Requires:       dvdauthor
 
-# Optional, not *strictly* required:
-Requires:       libdvdcss >= 1.2.8
-Requires:       mencoder
-Requires:       mplayer
+# Optional
+Requires(hint): mencoder
+Requires(hint): mplayer
 
 %description
 Video DVD backup and creation program, features include:
@@ -53,8 +62,8 @@ unset QTDIR || : ; . /etc/profile.d/qt.sh
 %configure \
   --disable-rpath \
   --enable-new-ldflags \
-  --disable-dependency-tracking --disable-final
-#  --disable-debug --disable-warnings \
+  --disable-dependency-tracking --disable-final \
+  --disable-debug 
 
 make %{?_smp_mflags}
 
@@ -87,7 +96,6 @@ rm -rf %{buildroot}
 touch --no-create %{_datadir}/icons/hicolor
 gtk-update-icon-cache -q %{_datadir}/icons/hicolor 2> /dev/null ||:
 
-
 %postun
 touch --no-create %{_datadir}/icons/hicolor
 gtk-update-icon-cache -q %{_datadir}/icons/hicolor 2> /dev/null ||:
@@ -96,7 +104,7 @@ gtk-update-icon-cache -q %{_datadir}/icons/hicolor 2> /dev/null ||:
 %files -f %{name}.lang
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING TODO
-%{_docdir}/HTML/en/k9copy
+%{_docdir}/HTML/en/k9copy/
 %{_bindir}/*
 %{_datadir}/applications/*.desktop
 %{_datadir}/apps/k9copy/
@@ -105,6 +113,9 @@ gtk-update-icon-cache -q %{_datadir}/icons/hicolor 2> /dev/null ||:
 
 
 %changelog
+* Fri Sep 19 2008 Rex Dieter <rdieter@fedoraproject.org> 1.2.2-3 
+- drop Requires: libdvdcss
+
 * Mon Sep 15 2008 Rex Dieter <rdieter@fedoraproject.org> 1.2.2-2
 - rebuild for rpmfusion
 
