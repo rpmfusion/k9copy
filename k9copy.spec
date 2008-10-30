@@ -8,18 +8,14 @@ BuildRequires: libutempter-devel
 %endif
 
 Name:           k9copy
-Version:        1.2.2
-Release:        3%{?dist}
+Version:        1.2.4
+Release:        1%{?dist}
 Summary:        Video DVD backup and creation program
 Group:          Applications/Multimedia
 License:        GPLv2
 URL:            http://k9copy.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
-Patch0:         k9copy-1.2.2-sprintf-overflow.patch
-Patch1:         k9copy-1.2.2-ffmpeg.patch
-Patch2:         k9copy-1.2.2-gcc43.patch
 
 BuildRequires:  dbus-qt-devel
 BuildRequires:  ffmpeg-devel
@@ -30,6 +26,8 @@ BuildRequires:  libdvdread-devel
 
 Requires:       dvd+rw-tools
 Requires:       dvdauthor
+Requires(post): xdg-utils
+Requires(postun): xdg-utils
 
 # Optional
 Requires(hint): mencoder
@@ -47,9 +45,6 @@ Video DVD backup and creation program, features include:
 
 %prep
 %setup -q
-%patch0 -p1 -b .sprintf-overflow
-%patch1 -p1 -b .ffmpeg
-%patch2 -p1 -b .gcc43
 
 # Permission fixes
 chmod -x */*.h */*.cpp AUTHORS COPYING TODO
@@ -83,10 +78,10 @@ make install DESTDIR=%{buildroot}
 
 # remove empty key Mimetypes
 desktop-file-install \
-  --vendor=livna --delete-original \
-  --dir=%{buildroot}%{_datadir}/applications \
+  --vendor="" \
+  --dir=%{buildroot}%{_datadir}/applications/kde \
   --remove-key=MimeTypes \
-  %{buildroot}%{_datadir}/applnk/Multimedia/*.desktop
+  %{buildroot}%{_datadir}/applications/kde/*.desktop
 
 # Convert symlink to relative
 rm -f %{buildroot}%{_docdir}/HTML/en/%{name}/common
@@ -100,12 +95,10 @@ rm -rf %{buildroot}
 
 
 %post
-touch --no-create %{_datadir}/icons/hicolor
-gtk-update-icon-cache -q %{_datadir}/icons/hicolor 2> /dev/null ||:
+xdg-icon-resource forceupdate --theme hicolor 2> /dev/null || :
 
 %postun
-touch --no-create %{_datadir}/icons/hicolor
-gtk-update-icon-cache -q %{_datadir}/icons/hicolor 2> /dev/null ||:
+xdg-icon-resource forceupdate --theme hicolor 2> /dev/null || :
 
 
 %files -f %{name}.lang
@@ -113,13 +106,16 @@ gtk-update-icon-cache -q %{_datadir}/icons/hicolor 2> /dev/null ||:
 %doc AUTHORS COPYING TODO
 %{_docdir}/HTML/en/k9copy/
 %{_bindir}/*
-%{_datadir}/applications/*.desktop
+%{_datadir}/applications/kde/*.desktop
 %{_datadir}/apps/k9copy/
 %{_datadir}/apps/konqueror/servicemenus/*.desktop
 %{_datadir}/icons/hicolor/*/*/*
 
 
 %changelog
+* Thu Oct 30 2008 Rex Dieter <rdieter@fedoraproject.org> 1.2.4-1
+- k9copy-1.2.4
+
 * Fri Sep 19 2008 Rex Dieter <rdieter@fedoraproject.org> 1.2.2-3 
 - drop Requires: libdvdcss
 
