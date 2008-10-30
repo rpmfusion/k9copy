@@ -1,0 +1,38 @@
+diff -up k9copy-2.1.0-Source/src/import/k9avidecode.cpp.ffmpeg k9copy-2.1.0-Source/src/import/k9avidecode.cpp
+--- k9copy-2.1.0-Source/src/import/k9avidecode.cpp.ffmpeg	2008-10-27 12:33:04.000000000 -0500
++++ k9copy-2.1.0-Source/src/import/k9avidecode.cpp	2008-10-30 11:17:44.000000000 -0500
+@@ -10,14 +10,14 @@
+ //
+ //
+ #include "k9avidecode.h"
+-#include <avcodec.h>
++#include <libavcodec/avcodec.h>
+ #include <qimage.h>
+ #include <dlfcn.h>
+ #include <klocale.h>
+ 
+ #include "ac.h"
+ #ifdef HAVE_SWSCALE
+-#include "swscale.h"
++#include <libswscale/swscale.h>
+ 
+ static int sws_flags = SWS_BICUBIC;
+ 
+diff -up k9copy-2.1.0-Source/src/import/k9avidecode.h.ffmpeg k9copy-2.1.0-Source/src/import/k9avidecode.h
+--- k9copy-2.1.0-Source/src/import/k9avidecode.h.ffmpeg	2008-10-27 12:33:04.000000000 -0500
++++ k9copy-2.1.0-Source/src/import/k9avidecode.h	2008-10-30 11:18:45.000000000 -0500
+@@ -14,12 +14,12 @@
+ 
+ #include "k9common.h"
+ #include <qobject.h>
+-#include <avformat.h>
++#include <libavformat/avformat.h>
+ #include <qimage.h>
+ #include <cstdlib>
+ #include <QObject>
+ #ifdef HAVE_SWSCALE
+-#include <swscale.h>
++#include <libswscale/swscale.h>
+ #endif
+ /**
+ 	@author Jean-Michel PETIT <k9copy@free.fr>

@@ -1,7 +1,7 @@
 
 Name:    k9copy
-Version: 2.0.2
-Release: 4%{?dist}
+Version: 2.1.0
+Release: 1%{?dist}
 Summary: Video DVD backup and creation program
 Group:   Applications/Multimedia
 License: GPLv2+
@@ -9,19 +9,15 @@ URL:     http://k9copy.sourceforge.net/
 Source0: http://downloads.sourceforge.net/%{name}/%{name}-%{version}-Source.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Patch1: k9copy-2.0.0-libdvdread_so4.patch
-Patch2: k9copy-2.0.0-gcc43.patch
-# FIXME/TODO: use pkgconfig
-Patch3: k9copy-2.0.2-ffmpeg.patch
-
-# FIXME: build fails here
-ExcludeArch: ppc ppc64
+Patch1: k9copy-2.1.0-ffmpeg.patch
+Patch2: k9copy-2.1.0-mimetype.patch
 
 BuildRequires: cmake
+BuildRequires: desktop-file-utils
 BuildRequires: ffmpeg-devel
 BuildRequires: gettext
 BuildRequires: hal-devel
-BuildRequires: kdelibs4-devel libutempter-devel
+BuildRequires: kdelibs4-devel
 BuildRequires: libdvdread-devel
 BuildRequires: pkgconfig
 BuildRequires: xine-lib-devel
@@ -49,16 +45,16 @@ Video DVD backup and creation program, features include:
 %prep
 %setup -q  -n %{name}-%{version}-Source
 
-%patch1 -p1 -b .libdvdread_so4
-%patch2 -p1 -b .gcc43
-%patch3 -p1 -b .ffmpeg
+%patch1 -p1 -b .ffmpeg
+%patch2 -p1 -b .mimetype
 
 
 %build
 mkdir -p %{_target_platform}
 pushd %{_target_platform}
 %{cmake_kde4} \
-  -DFFMPEG_INCLUDE_DIR=$(pkg-config libavcodec --variable=includedir) \
+  -DAVCODEC_INCLUDE_DIR=$(pkg-config libavcodec --variable=includedir) \
+  -DAVFORMAT_INCLUDE_DIR=$(pkg-config libavformat --variable=includedir) \
   -DFFMPEGSCALE_INCLUDE_DIR=$(pkg-config libswscale --variable=includedir) \
   ..
 popd
@@ -69,6 +65,16 @@ make %{?_smp_mflags} -C %{_target_platform} VERBOSE=1
 %install
 rm -rf %{buildroot}
 make install DESTDIR=%{buildroot} -C %{_target_platform}
+
+desktop-file-install \
+  --vendor="" \
+  --dir=%{buildroot}%{_kde4_datadir}/applications/kde4/ \
+  %{buildroot}%{_kde4_datadir}/applications/kde4/k9copy.desktop
+
+desktop-file-install \
+  --vendor="" \
+  --dir=%{buildroot}%{_kde4_datadir}/applications/kde4/ \
+  %{buildroot}%{_kde4_datadir}/applications/kde4/k9copy_assistant.desktop
 
 %find_lang %{name}
 
@@ -91,12 +97,16 @@ xdg-icon-resource forceupdate --theme hicolor 2> /dev/null || :
 %{_kde4_bindir}/k9play
 %{_kde4_bindir}/k9xineplayer
 %{_kde4_appsdir}/k9copy/
+%{_kde4_appsdir}/solid/actions/*.desktop
 %{_kde4_datadir}/applications/kde4/k9copy.desktop
-%{_kde4_datadir}/kde4/services/*
+%{_kde4_datadir}/applications/kde4/k9copy_assistant.desktop
 %{_kde4_iconsdir}/hicolor/*/*/*
 
 
 %changelog
+* Thu Oct 30 2008 Rex Dieter <rdieter@fedoraproject.org> 2.1.0-1
+- k9copy-2.1.0
+
 * Fri Sep 19 2008 Rex Dieter <rdieter@fedoraproject.org> 2.0.2-4
 - drop Requires: libdvdcss
 
