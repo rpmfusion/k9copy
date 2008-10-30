@@ -1,13 +1,16 @@
 
 Name:    k9copy
 Version: 2.1.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Video DVD backup and creation program
 Group:   Applications/Multimedia
 License: GPLv2+
 URL:     http://k9copy.sourceforge.net/
 Source0: http://downloads.sourceforge.net/%{name}/%{name}-%{version}-Source.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
+# FIXME: build fails here
+ExcludeArch: ppc ppc6
 
 Patch1: k9copy-2.1.0-ffmpeg.patch
 Patch2: k9copy-2.1.0-mimetype.patch
@@ -104,6 +107,9 @@ xdg-icon-resource forceupdate --theme hicolor 2> /dev/null || :
 
 
 %changelog
+* Thu Oct 30 2008 Rex Dieter <rdieter@fedoraproject.org> 2.1.0-2
+- ExcludeArch: ppc ppc64 (still fails)
+
 * Thu Oct 30 2008 Rex Dieter <rdieter@fedoraproject.org> 2.1.0-1
 - k9copy-2.1.0
 
