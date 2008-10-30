@@ -10,7 +10,7 @@ Source0: http://downloads.sourceforge.net/%{name}/%{name}-%{version}-Source.tar.
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 # FIXME: build fails here
-ExcludeArch: ppc ppc6
+ExcludeArch: ppc ppc64
 
 Patch1: k9copy-2.1.0-ffmpeg.patch
 Patch2: k9copy-2.1.0-mimetype.patch
