@@ -1,7 +1,7 @@
 
 Name:    k9copy
-Version: 2.1.0
-Release: 2%{?dist}
+Version: 2.2.0
+Release: 1%{?dist}
 Summary: Video DVD backup and creation program
 Group:   Applications/Multimedia
 License: GPLv2+
@@ -10,7 +10,7 @@ Source0: http://downloads.sourceforge.net/%{name}/%{name}-%{version}-Source.tar.
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 # FIXME: build fails here
-ExcludeArch: ppc ppc64
+#ExcludeArch: ppc ppc64
 
 Patch1: k9copy-2.1.0-ffmpeg.patch
 Patch2: k9copy-2.1.0-mimetype.patch
@@ -22,6 +22,7 @@ BuildRequires: gettext
 BuildRequires: hal-devel
 BuildRequires: kdelibs4-devel
 BuildRequires: libdvdread-devel
+BuildRequires: libmpeg2-devel
 BuildRequires: pkgconfig
 BuildRequires: xine-lib-devel
 
@@ -107,6 +108,9 @@ xdg-icon-resource forceupdate --theme hicolor 2> /dev/null || :
 
 
 %changelog
+* Fri Feb 20 2009 Rex Dieter <rdieter@fedoraproject.org> 2.2.0-1
+- k9copy-2.2.0
+
 * Thu Oct 30 2008 Rex Dieter <rdieter@fedoraproject.org> 2.1.0-2
 - ExcludeArch: ppc ppc64 (still fails)
 
