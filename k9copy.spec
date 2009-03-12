@@ -1,6 +1,6 @@
 
 Name:    k9copy
-Version: 2.2.0
+Version: 2.3.0
 Release: 1%{?dist}
 Summary: Video DVD backup and creation program
 Group:   Applications/Multimedia
@@ -63,24 +63,20 @@ pushd %{_target_platform}
   ..
 popd
 
-make %{?_smp_mflags} -C %{_target_platform} VERBOSE=1
+make %{?_smp_mflags} -C %{_target_platform}
 
 
 %install
 rm -rf %{buildroot}
+
 make install DESTDIR=%{buildroot} -C %{_target_platform}
 
-desktop-file-install \
-  --vendor="" \
-  --dir=%{buildroot}%{_kde4_datadir}/applications/kde4/ \
-  %{buildroot}%{_kde4_datadir}/applications/kde4/k9copy.desktop
-
-desktop-file-install \
-  --vendor="" \
-  --dir=%{buildroot}%{_kde4_datadir}/applications/kde4/ \
-  %{buildroot}%{_kde4_datadir}/applications/kde4/k9copy_assistant.desktop
-
 %find_lang %{name}
+
+
+%check
+desktop-file-validate %{buildroot}%{_kde4_datadir}/applications/kde4/k9copy.desktop
+desktop-file-validate %{buildroot}%{_kde4_datadir}/applications/kde4/k9copy_assistant.desktop
 
 
 %clean
@@ -104,10 +100,14 @@ xdg-icon-resource forceupdate --theme hicolor 2> /dev/null || :
 %{_kde4_appsdir}/solid/actions/*.desktop
 %{_kde4_datadir}/applications/kde4/k9copy.desktop
 %{_kde4_datadir}/applications/kde4/k9copy_assistant.desktop
+%{_kde4_docdir}/HTML/en/k9copy/
 %{_kde4_iconsdir}/hicolor/*/*/*
 
 
 %changelog
+* Thu Mar 12 2009 Rex Dieter <rdieter@fedoraproject.org> 2.3.0-1
+- k9copy-2.3.0
+
 * Fri Feb 20 2009 Rex Dieter <rdieter@fedoraproject.org> 2.2.0-1
 - k9copy-2.2.0
 
