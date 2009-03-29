@@ -1,7 +1,7 @@
 
 Name:    k9copy
 Version: 2.3.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Video DVD backup and creation program
 Group:   Applications/Multimedia
 License: GPLv2+
@@ -105,6 +105,9 @@ xdg-icon-resource forceupdate --theme hicolor 2> /dev/null || :
 
 
 %changelog
+* Sun Mar 29 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 2.3.0-2
+- rebuild for new F11 features
+
 * Thu Mar 12 2009 Rex Dieter <rdieter@fedoraproject.org> 2.3.0-1
 - k9copy-2.3.0
 
