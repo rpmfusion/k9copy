@@ -1,7 +1,7 @@
 
 Name:    k9copy
-Version: 2.3.0
-Release: 2%{?dist}
+Version: 2.3.1
+Release: 1%{?dist}
 Summary: Video DVD backup and creation program
 Group:   Applications/Multimedia
 License: GPLv2+
@@ -9,11 +9,9 @@ URL:     http://k9copy.sourceforge.net/
 Source0: http://downloads.sourceforge.net/%{name}/%{name}-%{version}-Source.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-# FIXME: build fails here
-#ExcludeArch: ppc ppc64
-
-Patch1: k9copy-2.1.0-ffmpeg.patch
+Patch1: k9copy-2.3.1-ffmpeg.patch
 Patch2: k9copy-2.1.0-mimetype.patch
+Patch3: k9copy-2.3.0-gcc44.patch
 
 BuildRequires: cmake
 BuildRequires: desktop-file-utils
@@ -25,9 +23,6 @@ BuildRequires: libdvdread-devel
 BuildRequires: libmpeg2-devel
 BuildRequires: pkgconfig
 BuildRequires: xine-lib-devel
-
-Requires(post): xdg-utils
-Requires(postun): xdg-utils
 
 Requires: dvd+rw-tools
 Requires: dvdauthor
@@ -51,6 +46,7 @@ Video DVD backup and creation program, features include:
 
 %patch1 -p1 -b .ffmpeg
 %patch2 -p1 -b .mimetype
+%patch3 -p1 -b .gcc44
 
 
 %build
@@ -84,10 +80,16 @@ rm -rf %{buildroot}
 
 
 %post
-xdg-icon-resource forceupdate --theme hicolor 2> /dev/null || :
+touch --no-create %{_kde4_iconsdir}/hicolor &> /dev/null ||:
+
+%posttrans
+gtk-update-icon-cache %{_kde4_iconsdir}/hicolor &> /dev/null ||:
 
 %postun
-xdg-icon-resource forceupdate --theme hicolor 2> /dev/null || :
+if [ $1 -eq 0 ] ; then
+  touch --no-create %{_kde4_iconsdir}/hicolor &> /dev/null ||:
+  gtk-update-icon-cache %{_kde4_iconsdir}/hicolor &> /dev/null ||:
+fi
 
 
 %files -f %{name}.lang
@@ -105,6 +107,10 @@ xdg-icon-resource forceupdate --theme hicolor 2> /dev/null || :
 
 
 %changelog
+* Mon Apr 06 2009 Rex Dieter <rdieter@fedoraproject.org> 2.3.1-1
+- k9copy-2.3.1
+- optimize scriptlets
+
 * Sun Mar 29 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 2.3.0-2
 - rebuild for new F11 features
 
