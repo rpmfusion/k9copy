@@ -1,0 +1,16 @@
+diff -up k9copy-2.3.0-Source/src/core/k9tools.cpp.gcc44 k9copy-2.3.0-Source/src/core/k9tools.cpp
+--- k9copy-2.3.0-Source/src/core/k9tools.cpp.gcc44	2009-03-12 08:32:29.000000000 -0500
++++ k9copy-2.3.0-Source/src/core/k9tools.cpp	2009-04-03 15:37:05.000000000 -0500
+@@ -26,6 +26,12 @@
+ #include <KUser>
+ #include <QDebug>
+ 
++#if defined(HAVE_INTTYPES_H)
++    #include <inttypes.h>
++#elif defined( HAVE_STDINT_H)
++     #include <stdint.h>
++#endif
++
+ QStringList m_temporaryDirs;
+ QString g_password="";
+ 
