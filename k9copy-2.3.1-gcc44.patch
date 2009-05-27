@@ -1,0 +1,22 @@
+diff -up k9copy-2.3.1-Source/src/core/k9dvdbackupinterface.h.gcc44 k9copy-2.3.1-Source/src/core/k9dvdbackupinterface.h
+--- k9copy-2.3.1-Source/src/core/k9dvdbackupinterface.h.gcc44	2009-04-04 03:32:21.000000000 -0500
++++ k9copy-2.3.1-Source/src/core/k9dvdbackupinterface.h	2009-04-06 11:38:29.000000000 -0500
+@@ -20,6 +20,7 @@
+ #ifndef K9DVDBACKUPINTERFACE_H
+ #define K9DVDBACKUPINTERFACE_H
+ 
++#include "k9common.h"
+ #include <QObject>
+ class k9DVDBackupInterface : public QObject
+ {
+diff -up k9copy-2.3.1-Source/src/core/k9tools.h.gcc44 k9copy-2.3.1-Source/src/core/k9tools.h
+--- k9copy-2.3.1-Source/src/core/k9tools.h.gcc44	2009-04-04 03:32:21.000000000 -0500
++++ k9copy-2.3.1-Source/src/core/k9tools.h	2009-04-06 11:37:43.000000000 -0500
+@@ -12,6 +12,7 @@
+ #ifndef K9TOOLS_H
+ #define K9TOOLS_H
+ 
++#include "k9common.h"
+ #include <QString>
+ #include <QList>
+ #include <QComboBox>
