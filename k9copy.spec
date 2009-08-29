@@ -1,6 +1,6 @@
 
 Name:    k9copy
-Version: 2.3.2
+Version: 2.3.3
 Release: 1%{?dist}
 Summary: Video DVD backup and creation program
 Group:   Applications/Multimedia
@@ -46,7 +46,7 @@ Video DVD backup and creation program, features include:
 
 %patch1 -p1 -b .ffmpeg
 %patch2 -p1 -b .mimetype
-%patch3 -p1 -b .gcc44
+#patch3 -p1 -b .gcc44
 
 
 %build
@@ -107,6 +107,9 @@ fi
 
 
 %changelog
+* Sat Aug 29 2009 Rex Dieter <rdieter@fedoraproject.org> 2.3.3-1
+- k9copy-2.3.3
+
 * Wed May 27 2009 Rex Dieter <rdieter@fedoraproject.org> 2.3.2-1
 - k9copy-2.3.2
 
