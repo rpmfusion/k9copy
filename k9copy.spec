@@ -11,7 +11,6 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Patch1: k9copy-2.3.1-ffmpeg.patch
 Patch2: k9copy-2.1.0-mimetype.patch
-Patch3: k9copy-2.3.1-gcc44.patch
 
 BuildRequires: cmake
 BuildRequires: desktop-file-utils
@@ -46,8 +45,6 @@ Video DVD backup and creation program, features include:
 
 %patch1 -p1 -b .ffmpeg
 %patch2 -p1 -b .mimetype
-#patch3 -p1 -b .gcc44
-
 
 %build
 mkdir -p %{_target_platform}
