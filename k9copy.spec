@@ -1,6 +1,6 @@
 
 Name:    k9copy
-Version: 2.3.3
+Version: 2.3.4
 Release: 1%{?dist}
 Summary: Video DVD backup and creation program
 Group:   Applications/Multimedia
@@ -9,7 +9,7 @@ URL:     http://k9copy.sourceforge.net/
 Source0: http://downloads.sourceforge.net/%{name}/%{name}-%{version}-Source.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Patch1: k9copy-2.3.1-ffmpeg.patch
+Patch1: k9copy-2.3.4-ffmpeg.patch
 Patch2: k9copy-2.1.0-mimetype.patch
 
 BuildRequires: cmake
@@ -104,6 +104,9 @@ fi
 
 
 %changelog
+* Wed Dec 23 2009 Rex Dieter <rdieter@fedoraproject.org> 2.3.4-1
+- k9copy-2.3.4
+
 * Sat Aug 29 2009 Rex Dieter <rdieter@fedoraproject.org> 2.3.3-1
 - k9copy-2.3.3
 
