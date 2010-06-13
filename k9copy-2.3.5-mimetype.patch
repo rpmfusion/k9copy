@@ -1,0 +1,32 @@
+diff -up k9copy-2.3.5-Source/k9copy_assistant.desktop.mimetype k9copy-2.3.5-Source/k9copy_assistant.desktop
+--- k9copy-2.3.5-Source/k9copy_assistant.desktop.mimetype	2010-02-07 05:30:38.000000000 -0600
++++ k9copy-2.3.5-Source/k9copy_assistant.desktop	2010-06-13 15:08:11.298178656 -0500
+@@ -12,9 +12,9 @@ GenericName=Video DVD Backup
+ GenericName[fr]=Backup de DVD Video
+ GenericName[tr]=DVD Vidyo Yedekleme Aracı
+ GenericName[ru]=Копирование с видео-DVD
+-MimeTypes=
++MimeType=
+ Terminal=false
+ Icon=k9copy
+ X-DocPath=k9copy/index.html
+ Categories=Qt;KDE;AudioVideo;DiscBurning;
+-X-KDE-StartupNotify=true
+\ No newline at end of file
++X-KDE-StartupNotify=true
+diff -up k9copy-2.3.5-Source/k9copy.desktop.mimetype k9copy-2.3.5-Source/k9copy.desktop
+--- k9copy-2.3.5-Source/k9copy.desktop.mimetype	2010-02-07 05:30:38.000000000 -0600
++++ k9copy-2.3.5-Source/k9copy.desktop	2010-06-13 15:08:01.364178993 -0500
+@@ -12,9 +12,9 @@ GenericName=Video DVD Backup
+ GenericName[fr]=Backup de DVD Video
+ GenericName[tr]=DVD Vidyo Yedekleme Aracı
+ GenericName[ru]=Копирование с видео-DVD
+-MimeTypes=
++MimeType=
+ Terminal=false
+ Icon=k9copy
+ X-DocPath=k9copy/index.html
+ Categories=Qt;KDE;AudioVideo;DiscBurning;
+-X-KDE-StartupNotify=true
+\ No newline at end of file
++X-KDE-StartupNotify=true

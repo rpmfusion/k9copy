@@ -1,6 +1,6 @@
 
 Name:    k9copy
-Version: 2.3.4
+Version: 2.3.5
 Release: 1%{?dist}
 Summary: Video DVD backup and creation program
 Group:   Applications/Multimedia
@@ -9,8 +9,9 @@ URL:     http://k9copy.sourceforge.net/
 Source0: http://downloads.sourceforge.net/%{name}/%{name}-%{version}-Source.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Patch1: k9copy-2.3.4-ffmpeg.patch
-Patch2: k9copy-2.1.0-mimetype.patch
+# upstreamable patches
+Patch51: k9copy-2.3.5-dso.patch
+Patch52: k9copy-2.3.5-mimetype.patch
 
 BuildRequires: cmake
 BuildRequires: desktop-file-utils
@@ -43,17 +44,14 @@ Video DVD backup and creation program, features include:
 %prep
 %setup -q  -n %{name}-%{version}-Source
 
-%patch1 -p1 -b .ffmpeg
-%patch2 -p1 -b .mimetype
+%patch51 -p1 -b .dso
+%patch52 -p1 -b .mimetype
+
 
 %build
 mkdir -p %{_target_platform}
 pushd %{_target_platform}
-%{cmake_kde4} \
-  -DAVCODEC_INCLUDE_DIR=$(pkg-config libavcodec --variable=includedir) \
-  -DAVFORMAT_INCLUDE_DIR=$(pkg-config libavformat --variable=includedir) \
-  -DFFMPEGSCALE_INCLUDE_DIR=$(pkg-config libswscale --variable=includedir) \
-  ..
+%{cmake_kde4} .. 
 popd
 
 make %{?_smp_mflags} -C %{_target_platform}
@@ -62,7 +60,7 @@ make %{?_smp_mflags} -C %{_target_platform}
 %install
 rm -rf %{buildroot}
 
-make install DESTDIR=%{buildroot} -C %{_target_platform}
+make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
 
 %find_lang %{name}
 
@@ -104,6 +102,9 @@ fi
 
 
 %changelog
+* Sun Jun 13 2010 Rex Dieter <rdieter@fedoraproject.org> 2.3.5-1
+- k9copy-2.3.5
+
 * Wed Dec 23 2009 Rex Dieter <rdieter@fedoraproject.org> 2.3.4-1
 - k9copy-2.3.4
 
