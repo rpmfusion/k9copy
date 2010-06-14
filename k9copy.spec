@@ -9,8 +9,10 @@ URL:     http://k9copy.sourceforge.net/
 Source0: http://downloads.sourceforge.net/%{name}/%{name}-%{version}-Source.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-# upstreamable patches
+## upstreamable patches
+# https://sourceforge.net/tracker/?func=detail&aid=3016055&group_id=157868&atid=805546
 Patch51: k9copy-2.3.5-dso.patch
+# https://sourceforge.net/tracker/?func=detail&aid=3016058&group_id=157868&atid=805546 
 Patch52: k9copy-2.3.5-mimetype.patch
 
 BuildRequires: cmake
