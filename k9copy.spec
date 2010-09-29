@@ -1,6 +1,6 @@
 
 Name:    k9copy
-Version: 2.3.5
+Version: 2.3.6
 Release: 1%{?dist}
 Summary: Video DVD backup and creation program
 Group:   Applications/Multimedia
@@ -10,8 +10,6 @@ Source0: http://downloads.sourceforge.net/%{name}/%{name}-%{version}-Source.tar.
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 ## upstreamable patches
-# https://sourceforge.net/tracker/?func=detail&aid=3016055&group_id=157868&atid=805546
-Patch51: k9copy-2.3.5-dso.patch
 # https://sourceforge.net/tracker/?func=detail&aid=3016058&group_id=157868&atid=805546 
 Patch52: k9copy-2.3.5-mimetype.patch
 
@@ -26,6 +24,7 @@ BuildRequires: libmpeg2-devel
 BuildRequires: pkgconfig
 BuildRequires: xine-lib-devel
 
+%{?_kde4_version:Requires: kdelibs4%{?_isa} >= %{_kde4_version}}
 Requires: dvd+rw-tools
 Requires: dvdauthor
 
@@ -46,7 +45,6 @@ Video DVD backup and creation program, features include:
 %prep
 %setup -q  -n %{name}-%{version}-Source
 
-%patch51 -p1 -b .dso
 %patch52 -p1 -b .mimetype
 
 
@@ -104,6 +102,9 @@ fi
 
 
 %changelog
+* Wed Sep 29 2010 Rex Dieter <rdieter@fedoraproject.org> 2.3.6-1
+- k9copy-2.3.6
+
 * Sun Jun 13 2010 Rex Dieter <rdieter@fedoraproject.org> 2.3.5-1
 - k9copy-2.3.5
 
