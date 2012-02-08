@@ -1,7 +1,7 @@
 
 Name:    k9copy
 Version: 2.3.6
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Video DVD backup and creation program
 Group:   Applications/Multimedia
 License: GPLv2+
@@ -102,6 +102,9 @@ fi
 
 
 %changelog
+* Wed Feb 08 2012 Nicolas Chauvet <kwizart@gmail.com> - 2.3.6-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
+
 * Wed Sep 29 2010 Rex Dieter <rdieter@fedoraproject.org> 2.3.6-1
 - k9copy-2.3.6
 
