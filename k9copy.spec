@@ -1,6 +1,6 @@
 
 Name:    k9copy
-Version: 2.3.6
+Version: 2.3.8
 Release: 1%{?dist}
 Summary: Video DVD backup and creation program
 Group:   Applications/Multimedia
@@ -11,13 +11,15 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 ## upstreamable patches
 # https://sourceforge.net/tracker/?func=detail&aid=3016058&group_id=157868&atid=805546 
-Patch52: k9copy-2.3.5-mimetype.patch
+Patch52: k9copy-2.3.8-mimetype.patch 
 
 BuildRequires: cmake
 BuildRequires: desktop-file-utils
 BuildRequires: ffmpeg-devel
 BuildRequires: gettext
+%if 0%{?fedora} && 0%{?fedora} < 16
 BuildRequires: hal-devel
+%endif
 BuildRequires: kdelibs4-devel
 BuildRequires: libdvdread-devel
 BuildRequires: libmpeg2-devel
@@ -29,8 +31,8 @@ Requires: dvd+rw-tools
 Requires: dvdauthor
 
 # Optional, not *strictly* required:
-Requires(hint): mencoder
-Requires(hint): mplayer
+Requires: mencoder
+Requires: mplayer
 
 %description
 Video DVD backup and creation program, features include:
@@ -62,7 +64,7 @@ rm -rf %{buildroot}
 
 make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
 
-%find_lang %{name}
+%find_lang %{name} --with-kde
 
 
 %check
@@ -97,11 +99,17 @@ fi
 %{_kde4_appsdir}/solid/actions/*.desktop
 %{_kde4_datadir}/applications/kde4/k9copy.desktop
 %{_kde4_datadir}/applications/kde4/k9copy_assistant.desktop
-%{_kde4_docdir}/HTML/en/k9copy/
 %{_kde4_iconsdir}/hicolor/*/*/*
 
 
 %changelog
+* Fri Feb 10 2012 Rex Dieter <rdieter@fedoraproject.org> 2.3.8-1
+- 2.3.8
+- drop use of Requires(hint)
+
+* Wed Feb 08 2012 Nicolas Chauvet <kwizart@gmail.com> - 2.3.6-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
+
 * Wed Sep 29 2010 Rex Dieter <rdieter@fedoraproject.org> 2.3.6-1
 - k9copy-2.3.6
 
