@@ -1,7 +1,7 @@
 
 Name:    k9copy
 Version: 2.3.8
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Video DVD backup and creation program
 Group:   Applications/Multimedia
 License: GPLv2+
@@ -103,6 +103,9 @@ fi
 
 
 %changelog
+* Fri Mar 02 2012 Nicolas Chauvet <kwizart@gmail.com> - 2.3.8-2
+- Rebuilt for c++ ABI breakage
+
 * Fri Feb 10 2012 Rex Dieter <rdieter@fedoraproject.org> 2.3.8-1
 - 2.3.8
 - drop use of Requires(hint)
