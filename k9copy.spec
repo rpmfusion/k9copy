@@ -1,7 +1,7 @@
 
 Name:    k9copy
 Version: 2.3.8
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Video DVD backup and creation program
 Group:   Applications/Multimedia
 License: GPLv2+
@@ -103,6 +103,9 @@ fi
 
 
 %changelog
+* Sun Mar 03 2013 Nicolas Chauvet <kwizart@gmail.com> - 2.3.8-3
+- Mass rebuilt for Fedora 19 Features
+
 * Fri Mar 02 2012 Nicolas Chauvet <kwizart@gmail.com> - 2.3.8-2
 - Rebuilt for c++ ABI breakage
 
