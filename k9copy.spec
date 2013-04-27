@@ -1,7 +1,7 @@
 
 Name:    k9copy
 Version: 2.3.8
-Release: 2%{?dist}
+Release: 4%{?dist}
 Summary: Video DVD backup and creation program
 Group:   Applications/Multimedia
 License: GPLv2+
@@ -9,13 +9,14 @@ URL:     http://k9copy.sourceforge.net/
 Source0: http://downloads.sourceforge.net/%{name}/%{name}-%{version}-Source.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
+Patch01: FindAv-compat.patch
 ## upstreamable patches
 # https://sourceforge.net/tracker/?func=detail&aid=3016058&group_id=157868&atid=805546 
 Patch52: k9copy-2.3.8-mimetype.patch 
 
 BuildRequires: cmake
 BuildRequires: desktop-file-utils
-BuildRequires: ffmpeg-devel
+BuildRequires: ffmpeg-compat-devel
 BuildRequires: gettext
 %if 0%{?fedora} && 0%{?fedora} < 16
 BuildRequires: hal-devel
@@ -47,6 +48,7 @@ Video DVD backup and creation program, features include:
 %prep
 %setup -q  -n %{name}-%{version}-Source
 
+%patch1 -p0 -b .ffmpeg-compat
 %patch52 -p1 -b .mimetype
 
 
@@ -103,6 +105,12 @@ fi
 
 
 %changelog
+* Sat Apr 27 2013 Sérgio Basto <sergio@serjux.com>
+- Switch to ffmpeg-compat.
+
+* Sun Mar 03 2013 Nicolas Chauvet <kwizart@gmail.com> - 2.3.8-3
+- Mass rebuilt for Fedora 19 Features
+
 * Fri Mar 02 2012 Nicolas Chauvet <kwizart@gmail.com> - 2.3.8-2
 - Rebuilt for c++ ABI breakage
 
