@@ -1,7 +1,7 @@
 
 Name:    k9copy
 Version: 2.3.8
-Release: 4%{?dist}
+Release: 5%{?dist}
 Summary: Video DVD backup and creation program
 Group:   Applications/Multimedia
 License: GPLv2+
@@ -105,6 +105,9 @@ fi
 
 
 %changelog
+* Mon May 27 2013 Nicolas Chauvet <kwizart@gmail.com> - 2.3.8-5
+- Rebuilt for x264/FFmpeg
+
 * Sat Apr 27 2013 Sérgio Basto <sergio@serjux.com>
 - Switch to ffmpeg-compat.
 
