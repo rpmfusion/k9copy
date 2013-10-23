@@ -1,7 +1,7 @@
 
 Name:    k9copy
 Version: 2.3.8
-Release: 5%{?dist}
+Release: 6%{?dist}
 Summary: Video DVD backup and creation program
 Group:   Applications/Multimedia
 License: GPLv2+
@@ -105,6 +105,9 @@ fi
 
 
 %changelog
+* Wed Oct 23 2013 Xavier Bachelot <xavier@bachelot.org> - 2.3.8-6
+- Rebuild for xine-lib 1.2.
+
 * Mon May 27 2013 Nicolas Chauvet <kwizart@gmail.com> - 2.3.8-5
 - Rebuilt for x264/FFmpeg
 
