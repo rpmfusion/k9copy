@@ -1,7 +1,7 @@
 
 Name:    k9copy
 Version: 2.3.8
-Release: 6%{?dist}
+Release: 7%{?dist}
 Summary: Video DVD backup and creation program
 Group:   Applications/Multimedia
 License: GPLv2+
@@ -105,6 +105,9 @@ fi
 
 
 %changelog
+* Sun Aug 31 2014 Sérgio Basto <sergio@serjux.com> - 2.3.8-7
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
+
 * Wed Oct 23 2013 Xavier Bachelot <xavier@bachelot.org> - 2.3.8-6
 - Rebuild for xine-lib 1.2.
 
