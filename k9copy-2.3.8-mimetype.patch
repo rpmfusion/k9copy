@@ -14,19 +14,3 @@ diff -up k9copy-2.3.8-Source/k9copy_assistant.desktop.mimetype k9copy-2.3.8-Sour
 -X-KDE-StartupNotify=true
 \ No newline at end of file
 +X-KDE-StartupNotify=true
-diff -up k9copy-2.3.8-Source/k9copy.desktop.mimetype k9copy-2.3.8-Source/k9copy.desktop
---- k9copy-2.3.8-Source/k9copy.desktop.mimetype	2011-12-09 15:08:41.000000000 -0600
-+++ k9copy-2.3.8-Source/k9copy.desktop	2012-02-10 09:01:02.330098511 -0600
-@@ -14,9 +14,9 @@ GenericName[fr]=Backup de DVD Video
- GenericName[tr]=DVD Vidyo Yedekleme Aracı
- GenericName[ru]=Копирование с видео-DVD
- GenericName[uk]=Копіювання відео-DVD
--MimeTypes=
-+MimeType=
- Terminal=false
- Icon=k9copy
- X-DocPath=k9copy/index.html
- Categories=Qt;KDE;AudioVideo;DiscBurning;
--X-KDE-StartupNotify=true
-\ No newline at end of file
-+X-KDE-StartupNotify=true

@@ -1,28 +1,27 @@
 
 Name:    k9copy
-Version: 2.3.8
-Release: 7%{?dist}
+Version: 3.0.3
+Release: 1%{?dist}
 Summary: Video DVD backup and creation program
 Group:   Applications/Multimedia
 License: GPLv2+
-URL:     http://k9copy.sourceforge.net/
-Source0: http://downloads.sourceforge.net/%{name}/%{name}-%{version}-Source.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+URL:     http://k9copy-reloaded.sourceforge.net/
+Source0: http://downloads.sourceforge.net/%{name}-reloaded/%{name}-%{version}.tar.gz
 
-Patch01: FindAv-compat.patch
-## upstreamable patches
-# https://sourceforge.net/tracker/?func=detail&aid=3016058&group_id=157868&atid=805546 
-Patch52: k9copy-2.3.8-mimetype.patch 
+#Patch01: FindAv-compat.patch
+Patch02: unbundled_dvdread_dvdnav.patch
+# upstreamable patches
+Patch52: k9copy-mimetype.patch
 
 BuildRequires: cmake
 BuildRequires: desktop-file-utils
-BuildRequires: ffmpeg-compat-devel
+BuildRequires: ffmpeg-devel
 BuildRequires: gettext
 %if 0%{?fedora} && 0%{?fedora} < 16
 BuildRequires: hal-devel
 %endif
 BuildRequires: kdelibs4-devel
-BuildRequires: libdvdread-devel
+BuildRequires: libdvdread-devel libdvdnav-devel
 BuildRequires: libmpeg2-devel
 BuildRequires: pkgconfig
 BuildRequires: xine-lib-devel
@@ -46,23 +45,26 @@ Video DVD backup and creation program, features include:
 
 
 %prep
-%setup -q  -n %{name}-%{version}-Source
+%setup -q  -n %{name}
 
-%patch1 -p0 -b .ffmpeg-compat
+%{__rm} -rf src/libdvdnav-NOW/
+%{__rm} -rf src/libdvdread-NOW/
+#patch1 -p0 -b .ffmpeg-compat
+%patch2 -p1 -b .unbundle
+
 %patch52 -p1 -b .mimetype
 
 
 %build
 mkdir -p %{_target_platform}
 pushd %{_target_platform}
-%{cmake_kde4} .. 
+%{cmake_kde4} ..
 popd
 
 make %{?_smp_mflags} -C %{_target_platform}
 
 
 %install
-rm -rf %{buildroot}
 
 make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
 
@@ -72,10 +74,6 @@ make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
 %check
 desktop-file-validate %{buildroot}%{_kde4_datadir}/applications/kde4/k9copy.desktop
 desktop-file-validate %{buildroot}%{_kde4_datadir}/applications/kde4/k9copy_assistant.desktop
-
-
-%clean
-rm -rf %{buildroot}
 
 
 %post
@@ -92,7 +90,6 @@ fi
 
 
 %files -f %{name}.lang
-%defattr(-,root,root,-)
 %doc COPYING
 %{_kde4_bindir}/k9copy
 %{_kde4_bindir}/k9play
@@ -105,6 +102,12 @@ fi
 
 
 %changelog
+* Thu May 28 2015 Sérgio Basto <sergio@serjux.com> - 3.0.3-1
+- Update to k9copy-3.0.3 .
+- New upstream URL http://k9copy-reloaded.sourceforge.net/ .
+- Unbundle libdvdread and libdvdnav .
+- Clean up the spec file and trailing withspaces .
+
 * Sun Aug 31 2014 Sérgio Basto <sergio@serjux.com> - 2.3.8-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
@@ -114,7 +117,7 @@ fi
 * Mon May 27 2013 Nicolas Chauvet <kwizart@gmail.com> - 2.3.8-5
 - Rebuilt for x264/FFmpeg
 
-* Sat Apr 27 2013 Sérgio Basto <sergio@serjux.com>
+* Sat Apr 27 2013 Sérgio Basto <sergio@serjux.com> - 2.3.8-4
 - Switch to ffmpeg-compat.
 
 * Sun Mar 03 2013 Nicolas Chauvet <kwizart@gmail.com> - 2.3.8-3
