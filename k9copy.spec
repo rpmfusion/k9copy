@@ -1,7 +1,7 @@
 
 Name:    k9copy
 Version: 3.0.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Video DVD backup and creation program
 Group:   Applications/Multimedia
 License: GPLv2+
@@ -12,6 +12,9 @@ Source0: http://downloads.sourceforge.net/%{name}-reloaded/%{name}-%{version}.ta
 Patch02: unbundled_dvdread_dvdnav.patch
 # upstreamable patches
 Patch52: k9copy-mimetype.patch
+Patch53: k9copy-FindAv.patch
+Patch54: k9copy-tempdir.patch
+Patch55: k9copy-qt5.patch
 
 BuildRequires: cmake
 BuildRequires: desktop-file-utils
@@ -25,6 +28,16 @@ BuildRequires: libdvdread-devel libdvdnav-devel
 BuildRequires: libmpeg2-devel
 BuildRequires: pkgconfig
 BuildRequires: xine-lib-devel
+#Qt 5 support
+#BuildRequires: extra-cmake-modules
+#BuildRequires: phonon-qt5-devel
+#BuildRequires: qt5-qtx11extras-devel
+#BuildRequires: kf5-solid-devel
+#BuildRequires: kf5-ki18n-devel
+#BuildRequires: kf5-kio-devel
+#BuildRequires: kf5-kiconthemes-devel
+#BuildRequires: kf5-kdoctools-devel
+#BuildRequires: kf5-kdesu-devel
 
 %{?_kde4_version:Requires: kdelibs4%{?_isa} >= %{_kde4_version}}
 Requires: dvd+rw-tools
@@ -53,12 +66,15 @@ Video DVD backup and creation program, features include:
 %patch2 -p1 -b .unbundle
 
 %patch52 -p1 -b .mimetype
+%patch53 -p1 -b .ffmpeg
+%patch54 -p0 -b .tmpdir
+#patch55 -p1 -b .qt5
 
 
 %build
 mkdir -p %{_target_platform}
 pushd %{_target_platform}
-%{cmake_kde4} ..
+%{cmake_kde4} .. -Wno-dev
 popd
 
 make %{?_smp_mflags} -C %{_target_platform}
@@ -102,6 +118,9 @@ fi
 
 
 %changelog
+* Sat Feb 06 2016 Sérgio Basto <sergio@serjux.com> - 3.0.3-2
+- Add k9copy-tempdir.patch and some cleanups
+
 * Thu May 28 2015 Sérgio Basto <sergio@serjux.com> - 3.0.3-1
 - Update to k9copy-3.0.3 .
 - New upstream URL http://k9copy-reloaded.sourceforge.net/ .
