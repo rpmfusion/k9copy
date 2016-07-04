@@ -121,7 +121,7 @@ fi
 
 %changelog
 * Mon Jul 04 2016 Sérgio Basto <sergio@serjux.com> - 3.0.3-3
-- Add patch to fix build with ffmpeg3 and gcc6 (Fedora)
+- Add patch to fix build with ffmpeg3 and gcc6 (Fedora 24)
 
 * Sat Feb 06 2016 Sérgio Basto <sergio@serjux.com> - 3.0.3-2
 - Add k9copy-tempdir.patch and some cleanups
