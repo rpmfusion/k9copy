@@ -1,7 +1,7 @@
 
 Name:    k9copy
 Version: 3.0.3
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Video DVD backup and creation program
 Group:   Applications/Multimedia
 License: GPLv2+
@@ -15,6 +15,7 @@ Patch52: k9copy-mimetype.patch
 Patch53: k9copy-FindAv.patch
 Patch54: k9copy-tempdir.patch
 Patch55: k9copy-qt5.patch
+Patch56: k9copy-ffmpeg3andgcc6.patch
 
 BuildRequires: cmake
 BuildRequires: desktop-file-utils
@@ -69,6 +70,7 @@ Video DVD backup and creation program, features include:
 %patch53 -p1 -b .ffmpeg
 %patch54 -p0 -b .tmpdir
 #patch55 -p1 -b .qt5
+%patch56 -p1 -b .f24
 
 
 %build
@@ -118,6 +120,9 @@ fi
 
 
 %changelog
+* Mon Jul 04 2016 Sérgio Basto <sergio@serjux.com> - 3.0.3-3
+- Add patch to fix build with ffmpeg3 and gcc6 (Fedora)
+
 * Sat Feb 06 2016 Sérgio Basto <sergio@serjux.com> - 3.0.3-2
 - Add k9copy-tempdir.patch and some cleanups
 
