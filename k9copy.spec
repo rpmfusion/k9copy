@@ -1,7 +1,7 @@
 
 Name:    k9copy
 Version: 3.0.3
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: Video DVD backup and creation program
 Group:   Applications/Multimedia
 License: GPLv2+
@@ -120,6 +120,9 @@ fi
 
 
 %changelog
+* Sun Mar 19 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 3.0.3-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
 * Mon Jul 04 2016 Sérgio Basto <sergio@serjux.com> - 3.0.3-3
 - Add patch to fix build with ffmpeg3 and gcc6 (Fedora 24)
 
